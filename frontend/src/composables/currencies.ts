@@ -8,9 +8,10 @@ export function getCurrencies() {
     function renewCurrencies() {
       axios.get('http://tt.loc/api/v1/currency')
       .then((response) => {
+              if (!response.data) { return; }
               const currencyStore = useCurrencyStore();
-              currencyStore.usd = response.data.usd ? response.data.usd : currencyStore.usd;
-              currencyStore.eur = response.data.eur ? response.data.eur : currencyStore.eur;
+              currencyStore.setCurrency('usd', response.data.usd);
+              currencyStore.setCurrency('eur', response.data.eur);
           })
     }
 

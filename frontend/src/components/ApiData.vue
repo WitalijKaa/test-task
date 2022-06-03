@@ -1,21 +1,30 @@
 <script lang="ts">
 import axios from 'axios';
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import Item from '@/models/Item';
 import * as CONF from '@/models/conf';
 import Group from '@/models/Group';
+import { useCurrencyStore } from '@/stores/currencyStore';
 
 type GroupsType = {[key: string]: Group}
 
 export default defineComponent({
+    setup () {
+        const store = useCurrencyStore()
+        return { store }
+    },
     data() { return {
         apiItems: [],
         apiGroups: [],
     }},
     mounted() {
-        var elems = document.querySelectorAll('.collapsible');
-        // @ts-ignore
-        var instances = M.Collapsible.init(elems, {});
+        nextTick(() => {
+            setTimeout(() => {
+                var elems = document.querySelectorAll('.collapsible');
+                // @ts-ignore
+                var instances = M.Collapsible.init(elems, {});
+            }, 500)
+        });
 
         Item.implementGroupsProvider({
             getNameByItemID: this.getNameByItemID
@@ -75,7 +84,7 @@ export default defineComponent({
 
 <template lang="pug">
 ul.collapsible
-  li(v-for="group in modelsGroups" :key="group.id")
+  li(v-for="(group, k, ix) in modelsGroups" :key="group.id" :class="{ active: !ix }")
     div.collapsible-header
       i.material-icons whatshot
       span {{group.name}}
@@ -89,7 +98,7 @@ ul.collapsible
               p Товар ## {{item.id}}
             div.card-action
               a(href="#" @click.prevent) осталось {{item.amount}}
-              a(href="#" @click.prevent) цена {{item.priceRUB}} ₽
+              a(href="#" @click.prevent :class="[store.isUsdRised ? 'red-text' : 'green-text']") цена {{item.priceRUB}} ₽
 </template>
 
 <style scoped>
