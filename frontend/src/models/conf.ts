@@ -1,3 +1,5 @@
+export const RENEW_CURRENCY_RATE_MS = 15000;
+
 // data.json
 export const K_PRICE_UDS = 'C';
 export const K_GROUP_ID = 'G';

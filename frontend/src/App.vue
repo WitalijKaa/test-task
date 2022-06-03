@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import { getCurrencies } from '@/composables/currencies';
+import { useCurrencyStore } from '@/stores/currencyStore';
+import Item from './models/Item';
+
 getCurrencies();
+Item.implementCurrencyConverter(useCurrencyStore().converter);
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="50" height="50" />
 
     <div class="wrapper">
       <div>TEST TASK ONE</div>
@@ -99,13 +103,14 @@ nav a:first-of-type {
   }
 
   header .wrapper {
+    width: 300px;
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    margin: 0 1rem 0 0;
   }
 
   nav {

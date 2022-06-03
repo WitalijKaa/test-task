@@ -1,8 +1,6 @@
 <script lang="ts">
 import axios from 'axios';
 import { defineComponent } from 'vue'
-import { mapState } from 'pinia'
-import { useCurrencyStore } from '@/stores/currencyStore';
 import Item from '@/models/Item';
 import * as CONF from '@/models/conf';
 import Group from '@/models/Group';
@@ -25,15 +23,13 @@ export default defineComponent({
                 });
         axios.get('http://tt.loc/api/v1/data/1/names.json')
             .then((response) => {
-                console.log(response.data)
                     this.apiGroups = response.data;
                 });
     },
     computed: {
-        ...mapState(useCurrencyStore, ['converter']),
         modelsItems() : Array<Item> {
             return this.apiItems.map((data) => {
-                const model = new Item(data[CONF.K_ITEM_ID], data[CONF.K_GROUP_ID], this.converter);
+                const model = new Item(data[CONF.K_ITEM_ID], data[CONF.K_GROUP_ID]);
                 model.amount = data[CONF.K_AMOUNT];
                 model.priceUSD = data[CONF.K_PRICE_UDS];
                 return model;
