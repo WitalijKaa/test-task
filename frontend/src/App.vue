@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+
 import { getCurrencies } from '@/composables/currencies';
 import { useCurrencyStore } from '@/stores/currencyStore';
 import Item from './models/Item';
+import { useDataStore } from '@/stores/dataStore';
 
 getCurrencies();
 Item.implementCurrencyConverter(useCurrencyStore().converter);
+
+const dataStore = useDataStore();
+dataStore.getDataByApi();
+Item.implementGroupsProvider({
+    getNameByItemID: dataStore.getNameByItemID
+});
 </script>
 
 <template lang="pug">

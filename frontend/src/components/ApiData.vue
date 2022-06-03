@@ -1,22 +1,15 @@
 <script lang="ts">
-import axios from 'axios';
 import { defineComponent, nextTick } from 'vue'
 import Item from '@/models/Item';
-import * as CONF from '@/models/conf';
-import Group from '@/models/Group';
 import { useCurrencyStore } from '@/stores/currencyStore';
-
-type GroupsType = {[key: string]: Group}
+import { useDataStore, type GroupsType } from '@/stores/dataStore';
 
 export default defineComponent({
     setup () {
-        const store = useCurrencyStore()
-        return { store }
+        const storeCurrency = useCurrencyStore()
+        const storeData = useDataStore()
+        return { storeCurrency, storeData }
     },
-    data() { return {
-        apiItems: [],
-        apiGroups: [],
-    }},
     mounted() {
         nextTick(() => {
             setTimeout(() => {
@@ -27,57 +20,12 @@ export default defineComponent({
         });
 
         Item.implementGroupsProvider({
-            getNameByItemID: this.getNameByItemID
+            getNameByItemID: this.storeData.getNameByItemID
         });
-
-        axios.get('http://tt.loc/api/v1/data/1/data.json')
-            .then((response) => {
-                    this.apiItems = response.data.Value.Goods;
-                });
-        axios.get('http://tt.loc/api/v1/data/1/names.json')
-            .then((response) => {
-                    this.apiGroups = response.data;
-                });
     },
     computed: {
-        modelsItems() : Array<Item> {
-            return this.apiItems.map((data) => {
-                const model = new Item(data[CONF.K_ITEM_ID], data[CONF.K_GROUP_ID]);
-                model.amount = data[CONF.K_AMOUNT];
-                model.priceUSD = data[CONF.K_PRICE_UDS];
-                return model;
-            })
-        },
-        modelsGroups() : GroupsType {
-            let models: GroupsType = {};
-            for (let groupID in this.apiGroups) {
-                const model = new Group(groupID, this.apiGroups[groupID][CONF.K_GROUP_NAME]);
-
-                for (let itemID in this.apiGroups[groupID][CONF.K_ITEMS_IN_GROUP]) {
-                    const apiItem = this.apiGroups[groupID][CONF.K_ITEMS_IN_GROUP][itemID];
-                    model.addItem(itemID, apiItem[CONF.K_ITEM_NAME]);
-                }
-                models[groupID] = model;
-            }
-            return models;
-        },
-        itemsNames() : Array<string> {
-            return this.modelsItems.map(model => model.name + ' ' + model.priceRUB);
-        }
-    },
-    methods: {
-        getNameByItemID(itemID: string, groupID: string) : string | undefined {
-            if (this.modelsGroups[groupID]) {
-                return this.modelsGroups[groupID].getItemByID(itemID);
-            }
-        },
-        isAnyItemInGroup(groupID: string) {
-            let isAny = false;
-            this.modelsItems.map((item) => {
-                if (item.groupID == groupID) { isAny = true; }
-            })
-            return isAny;
-        },
+        modelsGroups() : GroupsType { return this.storeData.modelsGroups; },
+        modelsItems() : Array<Item> { return this.storeData.modelsItems; },
     }
 })
 </script>
@@ -89,7 +37,7 @@ ul.collapsible
       i.material-icons whatshot
       span {{group.name}}
     div.collapsible-body
-      span(v-if="!isAnyItemInGroup(group.id)") Здесь типа пусто
+      span(v-if="!storeData.isAnyItemInGroup(group.id)") Здесь типа пусто
       span(v-else v-for="item in modelsItems")
         template(v-if="item.groupID == group.id" :key="item.id")
           div.card.blue-grey.darken-1
@@ -98,7 +46,7 @@ ul.collapsible
               p Товар ## {{item.id}}
             div.card-action
               a(href="#" @click.prevent) осталось {{item.amount}}
-              a(href="#" @click.prevent :class="[store.isUsdRised ? 'red-text' : 'green-text']") цена {{item.priceRUB}} ₽
+              a(href="#" @click.prevent :class="[storeCurrency.isUsdRised ? 'red-text' : 'green-text']") цена {{item.priceRUB}} ₽
 </template>
 
 <style scoped>
