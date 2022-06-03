@@ -61,20 +61,28 @@ export default defineComponent({
             if (this.modelsGroups[groupID]) {
                 return this.modelsGroups[groupID].getItemByID(itemID);
             }
-        }
+        },
+        isAnyItemInGroup(groupID: string) {
+            let isAny = false;
+            this.modelsItems.map((item) => {
+                if (item.groupID == groupID) { isAny = true; }
+            })
+            return isAny;
+        },
     }
 })
 </script>
 
 <template lang="pug">
 ul.collapsible
-  li(v-for="group in modelsGroups")
+  li(v-for="group in modelsGroups" :key="group.id")
     div.collapsible-header
       i.material-icons whatshot
       span {{group.name}}
     div.collapsible-body
-      span(v-for="item in modelsItems")
-        template(v-if="item.groupID == group.id")
+      span(v-if="!isAnyItemInGroup(group.id)") Здесь типа пусто
+      span(v-else v-for="item in modelsItems")
+        template(v-if="item.groupID == group.id" :key="item.id")
           div.card.blue-grey.darken-1
             div.card-content.white-text
               span.card-title {{item.name}}
