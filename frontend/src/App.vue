@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { getCurrencies } from '@/composables/currencies';
+getCurrencies();
 </script>
 
 <template>

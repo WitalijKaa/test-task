@@ -9,7 +9,7 @@ class CurrencyController extends Controller
     public function actionGet() {
         return [
             'usd' => rand(45, 95),
-            'euro' => rand(65, 125),
+            'eur' => rand(65, 125),
         ];
     }
 }

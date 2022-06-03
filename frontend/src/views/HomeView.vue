@@ -11,7 +11,7 @@ export default defineComponent ({
 div(class='some-page')
     div
         h1 Web-store
-        ApiData(file="names")
+        ApiData
 </template>
 
 <style lang="scss">
