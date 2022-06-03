@@ -1,8 +1,7 @@
 <script lang="ts">
 import { defineComponent, nextTick } from 'vue'
-import Item from '@/models/Item';
 import { useCurrencyStore } from '@/stores/currencyStore';
-import { useDataStore, type GroupsType } from '@/stores/dataStore';
+import { useDataStore } from '@/stores/dataStore';
 
 export default defineComponent({
     setup () {
@@ -18,27 +17,19 @@ export default defineComponent({
                 var instances = M.Collapsible.init(elems, {});
             }, 500)
         });
-
-        Item.implementGroupsProvider({
-            getNameByItemID: this.storeData.getNameByItemID
-        });
     },
-    computed: {
-        modelsGroups() : GroupsType { return this.storeData.modelsGroups; },
-        modelsItems() : Array<Item> { return this.storeData.modelsItems; },
-    }
 })
 </script>
 
 <template lang="pug">
 ul.collapsible
-  li(v-for="(group, k, ix) in modelsGroups" :key="group.id" :class="{ active: !ix }")
+  li(v-for="(group, k, ix) in storeData.modelsGroups" :key="group.id" :class="{ active: !ix }")
     div.collapsible-header
       i.material-icons whatshot
       span {{group.name}}
     div.collapsible-body
       span(v-if="!storeData.isAnyItemInGroup(group.id)") Здесь типа пусто
-      span(v-else v-for="item in modelsItems")
+      span(v-else v-for="item in storeData.modelsItems")
         template(v-if="item.groupID == group.id" :key="item.id")
           div.card.blue-grey.darken-1
             div.card-content.white-text
