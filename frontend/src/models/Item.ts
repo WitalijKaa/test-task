@@ -18,6 +18,12 @@ export default class Item {
         return Item.groupsProvider.getNameByItemID(this.id, this.groupID);
     }
 
+    public get clone() : Item {
+        let model = new Item(this.id, this.groupID);
+        model.priceUSD = this.priceUSD;
+        return model;
+    }
+
     public set priceUSD(price: number) {
         this.itemPriceUSD = price;
     }

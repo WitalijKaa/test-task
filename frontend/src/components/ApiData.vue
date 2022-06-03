@@ -2,12 +2,14 @@
 import { defineComponent, nextTick } from 'vue'
 import { useCurrencyStore } from '@/stores/currencyStore';
 import { useDataStore } from '@/stores/dataStore';
+import { useCartStore } from '@/stores/cartStore';
 
 export default defineComponent({
     setup () {
         const storeCurrency = useCurrencyStore()
         const storeData = useDataStore()
-        return { storeCurrency, storeData }
+        const storeCart = useCartStore()
+        return { storeCurrency, storeData, storeCart }
     },
     mounted() {
         nextTick(() => {
@@ -18,6 +20,11 @@ export default defineComponent({
             }, 500)
         });
     },
+    methods: {
+        buyItem(id: string) {
+            this.storeCart.buyItem(id);
+        }
+    }
 })
 </script>
 
@@ -38,6 +45,7 @@ ul.collapsible
             div.card-action
               a(href="#" @click.prevent) осталось {{item.amount}}
               a(href="#" @click.prevent :class="[storeCurrency.isUsdRised ? 'red-text' : 'green-text']") цена {{item.priceRUB}} ₽
+              a(href="#" @click.prevent="buyItem(item.id)") купить
 </template>
 
 <style scoped>

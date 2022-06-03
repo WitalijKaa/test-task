@@ -41,6 +41,17 @@ export const useDataStore = defineStore({
             }
         }
     },
+    getItemModelByID() {
+        return (itemID: string) : Item | undefined => {
+            let returnModel = undefined;
+            this.modelsItems.map((model) => {
+                if (model.id == itemID) {
+                    returnModel = model;
+                }
+            })
+            return returnModel;
+        }
+    },
     isAnyItemInGroup() {
         return (groupID: string) => {
             let isAny = false;
