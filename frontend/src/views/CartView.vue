@@ -1,5 +1,6 @@
 <template lang="pug">
-div(class='some-page')
+div.row
+  div.col-s12
     h1 Cart
 </template>
 

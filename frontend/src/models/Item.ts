@@ -12,7 +12,7 @@ export default class Item {
     private static converter: ICurrencyConverter;
     private static groupsProvider: GroupsProvider;
 
-    constructor(private readonly id: string, private readonly groupID: string) { }
+    constructor(public readonly id: string, public readonly groupID: string) { }
 
     public get name() : string | undefined {
         return Item.groupsProvider.getNameByItemID(this.id, this.groupID);
@@ -23,10 +23,10 @@ export default class Item {
     }
 
     public get priceRUB() : number {
-        return Item.converter.usdToRub(this.itemPriceUSD);
+        return +Item.converter.usdToRub(this.itemPriceUSD).toFixed(2);
     }
     public get priceUSD() : number {
-        return this.itemPriceUSD;
+        return +this.itemPriceUSD.toFixed(2);
     }
 
     public static implementGroupsProvider(provider: GroupsProvider) {

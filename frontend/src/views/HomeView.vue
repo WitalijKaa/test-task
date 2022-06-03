@@ -8,10 +8,10 @@ export default defineComponent ({
 </script>
 
 <template lang="pug">
-div(class='some-page')
-    div
-        h1 Web-store
-        ApiData
+div.row
+  div.col-s12
+    h1 Web-store
+    ApiData
 </template>
 
 <style lang="scss">

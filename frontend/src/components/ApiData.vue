@@ -13,6 +13,10 @@ export default defineComponent({
         apiGroups: [],
     }},
     mounted() {
+        var elems = document.querySelectorAll('.collapsible');
+        // @ts-ignore
+        var instances = M.Collapsible.init(elems, {});
+
         Item.implementGroupsProvider({
             getNameByItemID: this.getNameByItemID
         });
@@ -63,8 +67,21 @@ export default defineComponent({
 </script>
 
 <template lang="pug">
-div
-    pre {{itemsNames}}
+ul.collapsible
+  li(v-for="group in modelsGroups")
+    div.collapsible-header
+      i.material-icons whatshot
+      span {{group.name}}
+    div.collapsible-body
+      span(v-for="item in modelsItems")
+        template(v-if="item.groupID == group.id")
+          div.card.blue-grey.darken-1
+            div.card-content.white-text
+              span.card-title {{item.name}}
+              p Товар ## {{item.id}}
+            div.card-action
+              a(href="#" @click.prevent) осталось {{item.amount}}
+              a(href="#" @click.prevent) цена {{item.priceRUB}} ₽
 </template>
 
 <style scoped>
