@@ -65,7 +65,7 @@ export const useDataStore = defineStore({
   actions: {
     getDataByApi() {
         axios.get('http://tt.loc/api/v1/data/1/data.json')
-        .then((response) => {
+            .then((response) => {
                 this.apiItems = response.data.Value.Goods;
             });
         axios.get('http://tt.loc/api/v1/data/1/names.json')

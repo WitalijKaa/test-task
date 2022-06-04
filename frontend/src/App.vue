@@ -17,7 +17,6 @@ Item.implementGroupsProvider({
 </script>
 
 <template lang="pug">
-
 div.container
   nav
     div.nav-wrapper
