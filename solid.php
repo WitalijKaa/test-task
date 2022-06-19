@@ -8,11 +8,11 @@ class Controller {
         // DEPENDENCY INVERSION client relies on interface
         /** @var IDataProvider $provider */
         $provider = /* App::service->getDataProvider() or... */ new ProviderDB();
+        /** @var IDataFormatter $formatter */
+        $formatter = /* App::service->getFormatter() or... */ new FormatterEmail();
 
         $items = $provider->getForChannelAlpha();
-        $content = (new FormatterEmail())->format($items);
-
-        return $content;
+        return $formatter->format($items);
 
         // SINGLE RESPONSIBILITY
         // OPEN CLOSED
@@ -29,6 +29,13 @@ interface IDataProvider {
     public function getForChannelAlpha() : Collection;
     /** @return Collection|OutsideItem[] */
     public function getForChannelBeta() : Collection;
+}
+
+interface IDataFormatter {
+    /** @param Collection|OutsideItem[] $items
+     * @return string
+     */
+    public function format(Collection $items) : string;
 }
 
 interface IToOutsideItem {
@@ -106,7 +113,7 @@ class ProviderDB implements IDataProvider {
     }
 }
 
-class FormatterEmail {
+class FormatterEmail implements IDataFormatter {
     public function format(Collection $items) : string {
         $result = '';
         foreach ($items as $item) {
