@@ -148,6 +148,13 @@ class FunnyStory implements IToOutsideItem {
         //      but in these case we can easily replace-change the model...
         //      I mean changes in FunnyStory will not affect SeriousPost JustInfo
     }
+
+    public function toLogArray() {
+        return [
+            'log' => $this->toOutsideArray(), // I think its KISS example
+            'project' => 'some_constant',
+        ];
+    }
 }
 
 class SeriousPost implements IToOutsideItem{
