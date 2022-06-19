@@ -113,7 +113,9 @@ class ProviderDB implements IDataProvider {
     }
 }
 
+// DEPENDENCY INVERSION realization relies on interface
 class FormatterEmail implements IDataFormatter {
+    
     public function format(Collection $items) : string {
         $result = '';
         foreach ($items as $item) {
