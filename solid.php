@@ -144,6 +144,9 @@ class FunnyStory implements IToOutsideItem {
             'author' => $this->$creator,
             'tip' => $this->$description ?? '',
         ];
+        // KISS yes we can create some factory to transform db-model-to-outside-model,
+        //      but in these case we can easily replace-change the model...
+        //      I mean changes in FunnyStory will not affect SeriousPost JustInfo
     }
 }
 
