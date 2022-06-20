@@ -1,0 +1,15 @@
+.input {
+    display: inline-block;
+}
+
+.input--full-width {
+    width: 100%;
+}
+
+.input__input {
+    font-size: 18px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 4px;
+    width: calc(100% - 24px)
+}

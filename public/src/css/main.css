@@ -6,4 +6,28 @@ html, body {
 html, body, div, p {
     margin: 0;
     font-family: Consolas;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1000px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #eceff1;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.row {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.row-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }

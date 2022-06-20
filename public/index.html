@@ -6,6 +6,7 @@
     <link href="src/css/main.css" rel="stylesheet">
     <link href="src/css/elements/table.css" rel="stylesheet">
     <link href="src/css/elements/button.css" rel="stylesheet">
+    <link href="src/css/elements/input.css" rel="stylesheet">
     <link href="src/css/components/user-row.css" rel="stylesheet">
 
     <title>Task 3</title>
@@ -21,21 +22,46 @@
                     <div class="table__row-cell user-row--phone">+1234-5</div>
                 </div>
                 <div class="table__control">
-                    <div class="table__button button button--green button--hidden">Save</div>
-                    <div class="table__button button button--green">Edit</div>
-                    <div class="table__button button button--red">Delete</div>
+                    <div class="table__control-container">
+                        <div class="table__button button button--green button--hidden">Save</div>
+                        <div class="table__button button button--green">Edit</div>
+                        <div class="table__button button button--red">Delete</div>
+                    </div>
+                </div>
+            </div>
+            <div class="table__row user-row">
+                <div class="table__row-content">
+                    <div class="table__row-cell user-row--name">
+                        <div class="input input--full-width">
+                            <input class="input__input" name="user-name">
+                        </div>
+                    </div>
+                    <div class="table__row-cell user-row--phone">
+                        <div class="input">
+                            <input class="input__input" name="user-name">
+                        </div>
+                    </div>
+                </div>
+                <div class="table__control">
+                    <div class="table__control-container">
+                        <div class="table__button button button--green">Save</div>
+                        <div class="table__button button button--green button--hidden">Edit</div>
+                        <div class="table__button button button--red">Delete</div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="input">
-                <input name="user-name">
+        <div class="row user-row">
+            <div class="row-container">
+                <div class="input user-row--name">
+                    <input class="input__input" name="user-name">
+                </div>
+                <div class="input user-row--phone">
+                    <input class="input__input" name="user-phone">
+                </div>
+                <div class="button button--green">Add</div>
             </div>
-            <div class="phone">
-                <input name="user-phone">
-            </div>
-            <div class="button button--green">Add</div>
         </div>
 
     </div>

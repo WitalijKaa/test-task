@@ -1,2 +1,21 @@
 .button {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 2px solid #37474f;
+    border-radius: 8px;
+    cursor: pointer;
+    user-select: none;
+    background-color: #cfd8dc;
+}
+
+.button--green {
+    background-color: #66bb6a;
+}
+
+.button--red {
+    background-color: #ef5350;
+}
+
+.button--hidden {
+    display: none;
 }
