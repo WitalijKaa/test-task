@@ -2,9 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
+    <link href="src/css/main.css" rel="stylesheet">
+    <link href="src/css/elements/table.css" rel="stylesheet">
+    <link href="src/css/elements/button.css" rel="stylesheet">
+    <link href="src/css/components/user-row.css" rel="stylesheet">
+
     <title>Task 3</title>
 </head>
 <body>
 
+    <div class="container">
+
+        <div class="table table--full-width">
+            <div class="table__row user-row">
+                <div class="table__row-content">
+                    <div class="table__row-cell user-row--name">Omar Hajam</div>
+                    <div class="table__row-cell user-row--phone">+1234-5</div>
+                </div>
+                <div class="table__control">
+                    <div class="table__button button button--green button--hidden">Save</div>
+                    <div class="table__button button button--green">Edit</div>
+                    <div class="table__button button button--red">Delete</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input">
+                <input name="user-name">
+            </div>
+            <div class="phone">
+                <input name="user-phone">
+            </div>
+            <div class="button button--green">Add</div>
+        </div>
+
+    </div>
+
+<script type="application/javascript" src="src/js/main.js"></script>
 </body>
 </html>
