@@ -1,4 +1,5 @@
 .input {
+    position: relative;
     display: inline-block;
 }
 
@@ -12,4 +13,13 @@
     padding-right: 10px;
     border-radius: 4px;
     width: calc(100% - 24px)
+}
+
+.input__error {
+    position: absolute;
+    left: 0;
+    bottom: -14px;
+    font-size: 10px;
+    color: #c62828;
+    white-space: nowrap;
 }

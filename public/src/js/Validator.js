@@ -1,6 +1,12 @@
 class Validator {
 
+    static lastMessageBag = {};
+
+    messageBag = {};
+
     validate(model, rules) {
+        this.constructor.lastMessageBag = {};
+
         let errors = '';
         for (let fieldName in rules) {
             const value = model[fieldName];
@@ -8,7 +14,14 @@ class Validator {
 
             validators.map((validatorMethod) => {
                 if (!this[validatorMethod](value)) {
-                    errors += this[validatorMethod + 'Msg'](fieldName) + ' ## ';
+                    let errorMsg = this[validatorMethod + 'Msg'](fieldName);
+
+                    errors += errorMsg + ' ## ';
+
+                    if (!this.constructor.lastMessageBag.hasOwnProperty(fieldName)) {
+                        this.constructor.lastMessageBag[fieldName] = [];
+                    }
+                    this.constructor.lastMessageBag[fieldName].push(errorMsg)
                 }
             })
         }

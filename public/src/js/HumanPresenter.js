@@ -36,12 +36,14 @@ class HumanPresenter extends AbstractModelPresenter {
             '        <span data-elem-id="name">' + this.dataModel.name + '</span>\n' +
             '        <div data-elem-id="name-edit-container" class="input input--full-width elem--hidden">\n' +
             '            <input data-elem-id="name-edit" class="input__input" name="user-name">\n' +
+            '            <span data-elem-id="name-error" data-elem-type="show-validation-error" class="input__error elem--hidden"></span>\n' +
             '        </div>\n' +
             '    </div>\n' +
             '    <div class="table__row-cell user-row--phone">\n' +
             '        <span data-elem-id="phone">' + this.dataModel.phone + '</span>\n' +
             '        <div data-elem-id="phone-edit-container" class="input elem--hidden">\n' +
             '            <input data-elem-id="phone-edit" class="input__input" name="user-name">\n' +
+            '            <span data-elem-id="phone-error" data-elem-type="show-validation-error" class="input__error elem--hidden"></span>\n' +
             '        </div>\n' +
             '    </div>\n' +
             '</div>\n' +
@@ -67,6 +69,7 @@ class HumanPresenter extends AbstractModelPresenter {
 
     toggleEditMode() {
         if (!this._isActiveElement) { return; }
+        GlobalEventController.emitEvent('hideValidationErrorsForElements');
 
         if (this._editMode) {
             this._removeClass('edit', 'elem--hidden');
@@ -116,11 +119,18 @@ class HumanPresenter extends AbstractModelPresenter {
 
         this.dataModel.name = name;
         this.dataModel.phone = phone;
-        this.dataModel.saveByApi();
 
-        this._getElem('name').innerText = this.dataModel.name;
-        this._getElem('phone').innerText = this.dataModel.phone;
+        if (!this.dataModel.saveByApi()) {
+            GlobalEventController.emitEvent('showValidationErrorsForElements', [{
+                name: this._getElem('name-error'),
+                phone: this._getElem('phone-error'),
+            }]);
+        }
+        else {
+            this._getElem('name').innerText = this.dataModel.name;
+            this._getElem('phone').innerText = this.dataModel.phone;
 
-        this.toggleEditMode();
+            this.toggleEditMode();
+        }
     }
 }

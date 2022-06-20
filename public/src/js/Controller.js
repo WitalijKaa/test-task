@@ -32,6 +32,7 @@ class Controller {
     }
 
     actionAddHuman() {
+        GlobalEventController.emitEvent('hideValidationErrorsForElements');
         let name = document.getElementById('human-name').value;
         let phone = document.getElementById('human-phone').value;
 
@@ -45,6 +46,12 @@ class Controller {
 
             document.getElementById('human-name').value = '';
             document.getElementById('human-phone').value = '';
+        }
+        else {
+            GlobalEventController.emitEvent('showValidationErrorsForElements', [{
+                name: document.getElementById('name-error'),
+                phone: document.getElementById('phone-error'),
+            }]);
         }
     }
 

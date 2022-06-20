@@ -38,7 +38,7 @@ class Human {
         const validation = (new Validator()).validate(this, this.rules);
 
         if (true !== validation) {
-            GlobalEventController.emitEvent('msg', [validation.errors]);
+            //GlobalEventController.emitEvent('msg', [validation.errors]);
 
             for (let attrName in this._prevAttributes) {
                 if (this._prevAttributes.hasOwnProperty(attrName)) {
