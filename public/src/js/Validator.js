@@ -10,20 +10,26 @@ class Validator {
             const value = model[fieldName];
             const validators = rules[fieldName].split('|');
 
-            validators.map((validatorMethod) => {
-                if (!this[validatorMethod](value)) {
-                    let errorMsg = this[validatorMethod + 'Msg'](fieldName);
-
-                    errors += errorMsg + ' ## ';
-                    this.addToMessageBag(fieldName, errorMsg);
-                }
-            })
+            errors += this._validateValue(validators, fieldName, value);
         }
 
         if (errors) {
             return { errors: errors.slice(0, -4) };
         }
         return true;
+    }
+
+    _validateValue(validators, fieldName, value) {
+        let errors = '';
+        validators.map((validatorMethod) => {
+            if (!this[validatorMethod](value)) {
+                let errorMsg = this[validatorMethod + 'Msg'](fieldName);
+
+                errors += errorMsg + ' ## ';
+                this.addToMessageBag(fieldName, errorMsg);
+            }
+        })
+        return errors;
     }
 
     addToMessageBag(fieldName, errorMsg) {
