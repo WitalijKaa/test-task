@@ -32,7 +32,7 @@ class Validator {
 
     phone(value) {
         value = '' + value;
-        return true;
+        return value.match(/^\+?[0-9-]+$/);
     }
 
     phoneMsg(fieldName) { return 'Please provide valid phone number to "' + fieldName + '" field'; }
