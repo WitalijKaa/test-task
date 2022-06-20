@@ -2,6 +2,16 @@
 
 class Controller {
 
+    table;
+    eventsController;
+
+    idInDB = 100;
+
+    beforeActions() {
+        this.table = document.getElementById('humans');
+        this.eventsController = new ParentEventController();
+    };
+
     actionFakeHumans() {
         const apiTodo = [
             [1, 'Omar Hajam', '+1234-5'],
@@ -11,24 +21,41 @@ class Controller {
             [5, 'Eva', '+1234-9'],
         ];
 
-        const table = document.getElementById('humans');
-        const eventsController = new ParentEventController();
-
         apiTodo.map((person) => {
             let model = new Human();
             model.id = person[0];
             model.name = person[1];
             model.phone = person[2];
 
-            let presenter = new HumanPresenter(model);
-
-            eventsController.models.push(presenter);
-            presenter.injectParentEventsController(eventsController);
-
-            if (presenter.element) {
-                table.appendChild(presenter.element);
-            }
+            this._addNewHuman(model);
         })
     }
 
+    actionAddHuman() {
+        let name = document.getElementById('human-name').value;
+        let phone = document.getElementById('human-phone').value;
+
+        let model = new Human();
+        model.id = this.idInDB++;
+        model.name = name;
+        model.phone = phone;
+
+        if (model.saveByApi()) {
+            this._addNewHuman(model);
+
+            document.getElementById('human-name').value = '';
+            document.getElementById('human-phone').value = '';
+        }
+    }
+
+    _addNewHuman(model) {
+        let presenter = new HumanPresenter(model);
+
+        this.eventsController.models.push(presenter);
+        presenter.injectParentEventsController(this.eventsController);
+
+        if (presenter.element) {
+            this.table.appendChild(presenter.element);
+        }
+    }
 }

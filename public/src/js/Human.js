@@ -14,6 +14,10 @@ class Human {
     deleteByApi() {
         return true;
     }
+
+    saveByApi() {
+        return true;
+    }
 }
 
 class HumanPresenter extends AbstractModelPresenter {
