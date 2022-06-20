@@ -2,7 +2,7 @@
 
 const controller = new Controller();
 controller.beforeActions();
-controller.actionFakeHumans();
+controller.actionGenerateHumans();
 document.getElementById('add-human').addEventListener('click', () => {
     controller.actionAddHuman()
 })

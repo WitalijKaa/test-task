@@ -31,6 +31,7 @@ class Human {
     }
 
     deleteByApi() {
+        // fetch('url' + this.id, { method: 'DELETE' });
         return true;
     }
 
@@ -48,6 +49,8 @@ class Human {
 
             return false;
         }
+
+        // fetch('url' + this.id, { method: 'POST', body: body: this.toJson() });
         this._prevAttributes = {};
         return true;
     }

@@ -12,7 +12,7 @@ class Controller {
         this.eventsController = new ParentEventController();
     };
 
-    actionFakeHumans() {
+    actionGenerateHumans() {
         const apiTodo = [
             [1, 'Omar Hajam', '+1234-5'],
             [2, 'Anatolij Kuznecov', '+1234-6'],
@@ -21,13 +21,19 @@ class Controller {
             [5, 'Eva', '+1234-9'],
         ];
 
+        // fetch('http://some-cool/api/v1/human')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         // do the things like in .map() below
+        //     });
+
         apiTodo.map((person) => {
             let model = new Human();
             model.id = person[0];
             model.name = person[1];
             model.phone = person[2];
 
-            this._addNewHuman(model);
+            this._addHuman(model);
         })
     }
 
@@ -42,7 +48,7 @@ class Controller {
         model.phone = phone;
 
         if (model.saveByApi()) {
-            this._addNewHuman(model);
+            this._addHuman(model);
 
             document.getElementById('human-name').value = '';
             document.getElementById('human-phone').value = '';
@@ -55,7 +61,7 @@ class Controller {
         }
     }
 
-    _addNewHuman(model) {
+    _addHuman(model) {
         let presenter = new HumanPresenter(model);
 
         this.eventsController.models.push(presenter);
