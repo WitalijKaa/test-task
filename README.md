@@ -1,30 +1,13 @@
 # test-task
 
-in /frontend readme there is a task
+## Single Page Application (SPA) приложение для редактирования списка пользователей:
 
-## deploy
-
-composer install
-
-mount /public to http://tt.loc/
-
-http://tt.loc/api/v1/currency
-http://tt.loc/api/v1/data/1/data.json
-http://tt.loc/api/v1/data/1/names.json
-
-goto /frontend
-
-npm install
-npm run dev
-
-## comments
-
-all api communication and storing data goes throw the /frontend/src/stores
-
-viewing data and cart goes throw the /frontend/src/components
-
-data items is represented in models
-
-to handle mess in api data there is a conf.ts
-
-components should be separated to small view items, but I think it's very obvious and very easy
+### Одна страница, таблица с полями: имя, телефон. Кнопки: общая - добавить, для каждой строки данных - редактировать, стереть.
+### Под таблицей поля для ввода имени и телефона.
+### При нажатии кнопки добавить - в таблицу добавляется пользователь с данными из заполненных полей. Валидация: имя не пустое, телефон состоит только из цифр, тире (возможен “+” как первый символ). Если валидация не пройдена - где то рядом появляется сообщение об ошибке.
+### Редактирование - поля в списке превращаются в текстовые и появляется кнопка для сохранения изменений (или же кнопка для начала редактирования превращается в кнопку сохранения). Валидация такая же, как и при добавлении.
+### Удаление - удаляет строку.
+### Начальные данные: 4-5 пользователей.
+### Связи с сервером нет, но должны быть placeholders. Т.е. Там, где должна быть свзяль с сервером (AJAX) что-то должно быть (может, закомментированное).
+### Требования: Не использовать библиотеки и фреймворки.
+### Пакет: исходники на JavaScript/CSS/HTML.
