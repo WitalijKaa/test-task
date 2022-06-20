@@ -10,6 +10,10 @@ class Human {
     set phone(val) {
         this._phone = val;
     }
+
+    deleteByApi() {
+        return true;
+    }
 }
 
 class HumanPresenter extends AbstractModelPresenter {
@@ -30,6 +34,10 @@ class HumanPresenter extends AbstractModelPresenter {
     get element() {
         if (this._element) { return this._element; }
         return this.createElement();
+    }
+
+    get _isActiveElement() {
+        return !!(this.dataModel && this._element);
     }
 
     createElement() {
@@ -72,9 +80,12 @@ class HumanPresenter extends AbstractModelPresenter {
 
         this._addEventHandler('edit', 'click', 'toggleEditMode');
         this._addEventHandler('save', 'click', 'toggleEditMode');
+        this._addEventHandler('delete', 'click', 'deleteModel');
     }
 
     toggleEditMode() {
+        if (!this._isActiveElement) { return; }
+
         if (this._editMode) {
             this._removeClass('edit', 'elem--hidden');
             this._addClass('save', 'elem--hidden');
@@ -99,8 +110,19 @@ class HumanPresenter extends AbstractModelPresenter {
     }
     
     handleEditModeOnInGroup(id) {
+        if (!this._isActiveElement) { return; }
+
         if (this.dataModel.id != id && this._editMode) {
             this.toggleEditMode();
+        }
+    }
+
+    deleteModel() {
+        if (!this._isActiveElement) { return; }
+
+        if (this.dataModel.deleteByApi()) {
+            this.dataModel = null;
+            this._element.remove();
         }
     }
 }
