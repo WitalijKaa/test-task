@@ -15,11 +15,23 @@
 
     <div class="container">
 
-        <div class="table table--full-width">
-            <div class="table__row user-row">
+        <div id="humans" class="table table--full-width"></div>
+
+        <div class="table table--full-width" style="display: none;">
+            <div class="table__row user-row user-row--view">
                 <div class="table__row-content">
-                    <div class="table__row-cell user-row--name">Omar Hajam</div>
-                    <div class="table__row-cell user-row--phone">+1234-5</div>
+                    <div class="table__row-cell user-row--name">
+                        <span>Omar Hajam</span>
+                        <div class="input input--full-width">
+                            <input class="input__input" name="user-name">
+                        </div>
+                    </div>
+                    <div class="table__row-cell user-row--phone">
+                        <span>+1234-5</span>
+                        <div class="input">
+                            <input class="input__input" name="user-name">
+                        </div>
+                    </div>
                 </div>
                 <div class="table__control">
                     <div class="table__control-container">
@@ -29,14 +41,16 @@
                     </div>
                 </div>
             </div>
-            <div class="table__row user-row">
+            <div class="table__row user-row user-row--edit">
                 <div class="table__row-content">
                     <div class="table__row-cell user-row--name">
+                        <span>Omar Hajam</span>
                         <div class="input input--full-width">
                             <input class="input__input" name="user-name">
                         </div>
                     </div>
                     <div class="table__row-cell user-row--phone">
+                        <span>+1234-5</span>
                         <div class="input">
                             <input class="input__input" name="user-name">
                         </div>
@@ -44,8 +58,8 @@
                 </div>
                 <div class="table__control">
                     <div class="table__control-container">
-                        <div class="table__button button button--green">Save</div>
-                        <div class="table__button button button--green button--hidden">Edit</div>
+                        <div class="table__button button button--green button--hidden">Save</div>
+                        <div class="table__button button button--green">Edit</div>
                         <div class="table__button button button--red">Delete</div>
                     </div>
                 </div>
@@ -66,6 +80,8 @@
 
     </div>
 
+<script type="application/javascript" src="src/js/Human.js"></script>
+<script type="application/javascript" src="src/js/Controller.js"></script>
 <script type="application/javascript" src="src/js/main.js"></script>
 </body>
 </html>

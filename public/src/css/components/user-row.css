@@ -1,4 +1,12 @@
-.user-row {
+.user-row.user-row--view .input {
+    display: none;
+}
+
+.user-row.user-row--edit .input {
+    display: initial;
+}
+.user-row.user-row--edit span {
+    display: none;
 }
 
 .user-row--name {
