@@ -79,7 +79,7 @@ class HumanPresenter extends AbstractModelPresenter {
         if (!this._element) { return; }
 
         this._addEventHandler('edit', 'click', 'toggleEditMode');
-        this._addEventHandler('save', 'click', 'toggleEditMode');
+        this._addEventHandler('save', 'click', 'saveModel');
         this._addEventHandler('delete', 'click', 'deleteModel');
     }
 
@@ -95,6 +95,8 @@ class HumanPresenter extends AbstractModelPresenter {
             this._addClass('phone-edit-container', 'elem--hidden');
         }
         else {
+            this._getElem('name-edit').value = this.dataModel.name;
+            this._getElem('phone-edit').value = this.dataModel.phone;
             this._addClass('edit', 'elem--hidden');
             this._removeClass('save', 'elem--hidden');
             this._addClass('name', 'elem--hidden');
@@ -124,5 +126,18 @@ class HumanPresenter extends AbstractModelPresenter {
             this.dataModel = null;
             this._element.remove();
         }
+    }
+
+    saveModel() {
+        let name = this._getElem('name-edit').value;
+        let phone = this._getElem('phone-edit').value;
+
+        this.dataModel.name = name;
+        this.dataModel.phone = phone;
+
+        this._getElem('name').innerText = this.dataModel.name;
+        this._getElem('phone').innerText = this.dataModel.phone;
+
+        this.toggleEditMode();
     }
 }
