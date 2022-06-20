@@ -3,13 +3,13 @@
 class Controller {
 
     table;
-    eventsController;
+    humansContainerEventsController;
 
     idInDB = 100;
 
     beforeActions() {
         this.table = document.getElementById('humans');
-        this.eventsController = new ParentEventController();
+        this.humansContainerEventsController = new ParentEventController();
     };
 
     actionGenerateHumans() {
@@ -64,10 +64,10 @@ class Controller {
     _addHuman(model) {
         let presenter = new HumanPresenter(model);
 
-        this.eventsController.models.push(presenter);
-        presenter.injectParentEventsController(this.eventsController);
-
         if (presenter.element) {
+            this.humansContainerEventsController.models.push(presenter);
+            presenter.injectParentEventsController(this.humansContainerEventsController);
+
             this.table.appendChild(presenter.element);
         }
     }

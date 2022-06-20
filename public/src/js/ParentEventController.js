@@ -6,5 +6,6 @@ class ParentEventController {
         this.models.map((model) => {
             model.handleParentEvent(eventName, params)
         })
+        GlobalEventController.emitEvent(eventName, params);
     }
 }

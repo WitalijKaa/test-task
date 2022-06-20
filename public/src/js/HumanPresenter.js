@@ -69,7 +69,7 @@ class HumanPresenter extends AbstractModelPresenter {
 
     toggleEditMode() {
         if (!this._isActiveElement) { return; }
-        GlobalEventController.emitEvent('hideValidationErrorsForElements');
+        this.emitEvent('hideValidationErrorsForElements');
 
         if (this._editMode) {
             this._removeClass('edit', 'elem--hidden');
@@ -114,6 +114,8 @@ class HumanPresenter extends AbstractModelPresenter {
     }
 
     saveModel() {
+        if (!this._isActiveElement) { return; }
+
         let name = this._getElem('name-edit').value;
         let phone = this._getElem('phone-edit').value;
 
@@ -121,7 +123,7 @@ class HumanPresenter extends AbstractModelPresenter {
         this.dataModel.phone = phone;
 
         if (!this.dataModel.saveByApi()) {
-            GlobalEventController.emitEvent('showValidationErrorsForElements', [{
+            this.emitEvent('showValidationErrorsForElements', [{
                 name: this._getElem('name-error'),
                 phone: this._getElem('phone-error'),
             }]);

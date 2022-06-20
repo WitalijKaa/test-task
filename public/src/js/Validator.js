@@ -2,8 +2,6 @@ class Validator {
 
     static lastMessageBag = {};
 
-    messageBag = {};
-
     validate(model, rules) {
         this.constructor.lastMessageBag = {};
 
@@ -17,11 +15,7 @@ class Validator {
                     let errorMsg = this[validatorMethod + 'Msg'](fieldName);
 
                     errors += errorMsg + ' ## ';
-
-                    if (!this.constructor.lastMessageBag.hasOwnProperty(fieldName)) {
-                        this.constructor.lastMessageBag[fieldName] = [];
-                    }
-                    this.constructor.lastMessageBag[fieldName].push(errorMsg)
+                    this.addToMessageBag(fieldName, errorMsg);
                 }
             })
         }
@@ -30,6 +24,13 @@ class Validator {
             return { errors: errors.slice(0, -4) };
         }
         return true;
+    }
+
+    addToMessageBag(fieldName, errorMsg) {
+        if (!this.constructor.lastMessageBag.hasOwnProperty(fieldName)) {
+            this.constructor.lastMessageBag[fieldName] = [];
+        }
+        this.constructor.lastMessageBag[fieldName].push(errorMsg)
     }
 
     __call() {
@@ -45,7 +46,7 @@ class Validator {
 
     phone(value) {
         value = '' + value;
-        return value.match(/^\+?[0-9-]+$/);
+        return value.match(/^\+?[0-9-]{5,20}$/);
     }
 
     phoneMsg(fieldName) { return 'Please provide valid phone number to "' + fieldName + '" field'; }

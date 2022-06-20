@@ -30,6 +30,14 @@ class Human {
         this._phone = val;
     }
 
+    restorePreviousAttributes() {
+        for (let attrName in this._prevAttributes) {
+            if (this._prevAttributes.hasOwnProperty(attrName)) {
+                this['_' + attrName] = this._prevAttributes[attrName];
+            }
+        }
+    }
+
     deleteByApi() {
         // fetch('url' + this.id, { method: 'DELETE' });
         return true;
@@ -39,14 +47,7 @@ class Human {
         const validation = (new Validator()).validate(this, this.rules);
 
         if (true !== validation) {
-            //GlobalEventController.emitEvent('msg', [validation.errors]);
-
-            for (let attrName in this._prevAttributes) {
-                if (this._prevAttributes.hasOwnProperty(attrName)) {
-                    this['_' + attrName] = this._prevAttributes[attrName];
-                }
-            }
-
+            this.restorePreviousAttributes();
             return false;
         }
 
