@@ -31,3 +31,7 @@ html, body, div, p {
     gap: 20px;
     align-items: center;
 }
+
+.elem--hidden {
+    display: none !important;
+}
