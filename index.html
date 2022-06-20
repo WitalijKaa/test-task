@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="/backbone/jquery.js"></script>
+    <script src="/backbone/underscore-umd.js"></script>
+    <script src="/backbone/backbone.js"></script>
+
+    <title>Backbone JS</title>
+</head>
+<body>
+
+<script type="application/javascript">
+
+$(function() {
+
+    var object = {};
+
+    _.extend(object, Backbone.Events);
+
+    object.on("alert", function(msg) {
+        alert("Backbone JS event " + msg);
+    });
+
+    object.trigger("alert", "triggered!");
+})
+</script>
+
+</body>
+</html>
