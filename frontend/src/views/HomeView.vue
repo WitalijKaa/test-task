@@ -7,11 +7,12 @@ export default defineComponent ({
 });
 </script>
 
-<template lang="pug">
-div.row
-  div.col-s12
-    h1 Web-store
-    ApiData
+<template>
+<div class="row">
+    <div class="col-s12">
+        <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
+    </div>
+</div>
 </template>
 
 <style lang="scss">
