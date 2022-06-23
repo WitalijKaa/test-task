@@ -1,3 +1,11 @@
+# docker windows
+
+docker build -t 'task_anton' -f 'C:\contejneri\Dockerfile' .
+
+docker run --rm -d -p 8080:8080 task_anton
+
+https://github.com/nystudio107/vitejs-docker-dev
+
 # test-task
 
 in /frontend readme there is a task
