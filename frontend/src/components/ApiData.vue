@@ -1,51 +1,47 @@
 <script lang="ts">
-import { defineComponent, nextTick } from 'vue'
-import { useCurrencyStore } from '@/stores/currencyStore';
+import { defineComponent } from 'vue'
 import { useDataStore } from '@/stores/dataStore';
-import { useCartStore } from '@/stores/cartStore';
+import { mapStores, mapState, mapActions } from 'pinia';
 
 export default defineComponent({
-    setup () {
-        const storeCurrency = useCurrencyStore()
-        const storeData = useDataStore()
-        const storeCart = useCartStore()
-        return { storeCurrency, storeData, storeCart }
+    computed: {
+        ...mapStores(useDataStore),
+        ...mapState(useDataStore, ['modelsItems', 'apiItems']),
     },
     mounted() {
-        nextTick(() => {
-            setTimeout(() => {
-                var elems = document.querySelectorAll('.collapsible');
-                // @ts-ignore
-                var instances = M.Collapsible.init(elems, {});
-            }, 500)
-        });
+        this.getDataByApi();
     },
     methods: {
-        buyItem(id: string) {
-            this.storeCart.buyItem(id);
-        }
+        ...mapActions(useDataStore, ['getDataByApi']),
+        editDataRowOnClick(id) {
+            this.$emit('editRecord', id)
+        },
+        deleteDataRowOnClick(ix) {
+            this.apiItems.splice(ix, 1)
+        },
     }
 })
 </script>
 
-<template lang="pug">
-ul.collapsible
-  li(v-for="(group, k, ix) in storeData.modelsGroups" :key="group.id" :class="{ active: !ix }")
-    div.collapsible-header
-      i.material-icons whatshot
-      span {{group.name}}
-    div.collapsible-body
-      span(v-if="!storeData.isAnyItemInGroup(group.id)") Здесь типа пусто
-      span(v-else v-for="item in storeData.modelsItems")
-        template(v-if="item.groupID == group.id" :key="item.id")
-          div.card.blue-grey.darken-1
-            div.card-content.white-text
-              span.card-title {{item.name}}
-              p Товар ## {{item.id}}
-            div.card-action
-              a(href="#" @click.prevent) осталось {{item.amount}}
-              a(href="#" @click.prevent :class="[storeCurrency.isUsdRised ? 'red-text' : 'green-text']") цена {{item.priceRUB}} ₽
-              a(href="#" @click.prevent="buyItem(item.id)") купить
+<template>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th @click="editDataRowOnClick()">Settings</th>
+            <th>Edit record</th>
+            <th>Delete record</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(record, ix) in modelsItems">
+            <td class="row-data">{{ record.id + 1 }}</td>
+            <td class="row-data">{{ record.doc_path }}</td>
+            <td><button @click="editDataRowOnClick(record.id)">edit</button></td>
+            <td><button @click="deleteDataRowOnClick(ix)">delete</button></td>
+        </tr>
+        </tbody>
+    </table>
 </template>
 
 <style scoped>

@@ -1,34 +1,22 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-
-import { getCurrencies } from '@/composables/currencies';
-import { useCurrencyStore } from '@/stores/currencyStore';
-import Item from './models/Item';
-import { useDataStore } from '@/stores/dataStore';
-
-getCurrencies();
-Item.implementCurrencyConverter(useCurrencyStore().converter);
-
-const dataStore = useDataStore();
-dataStore.getDataByApi();
-Item.implementGroupsProvider({
-    getNameByItemID: dataStore.getNameByItemID
-});
 </script>
 
-<template lang="pug">
-div.container
-  nav
-    div.nav-wrapper
-      ul.right.hide-on-med-and-down
-        li
-          RouterLink(to="/") Store
-        li
-          RouterLink(to="/cart") Cart
-  RouterView
+<template>
+    <!-- Navbar -->
+    <nav class="nav" tabindex="-1" onclick="this.focus()">
+        <div class="container" style="position: center;">
+            <a class="pagename current" href="#">SyncPro</a>
+            <a href="#">Settings</a>
+            <a href="#">Log</a>
+            <a href="#">License</a>
+        </div>
+    </nav>
+    <button class="btn-close btn btn-sm">×</button>
+
+    <RouterView></RouterView>
 </template>
 
 <style>
 @import '@/assets/base.css';
-
 </style>
