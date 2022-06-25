@@ -28,6 +28,9 @@
         <div class="col-s12">
             <h1>Web-store</h1>
         </div>
+        <div id="app" class="col-s12">
+
+        </div>
     </div>
 </div>
 
@@ -35,10 +38,37 @@
 
 $(function() {
 
-    var Currency = Backbone.Model.extend({
-        urlRoot: '/api/v1/currency'
+    // let Currency = Backbone.Model.extend({
+    // });
+
+    let Currencies = Backbone.Collection.extend({
+        url: 'http://tt-a.loc/api/v1/currency',
+        //model: Currency,
     });
-    
+
+    let currencies = new Currencies();
+
+    // let PUT_model = currencies.create({"id":1,"usd":67,"eur":69});
+
+    let AppView = Backbone.View.extend({
+        el: $("#app"),
+        template: _.template("<div>usd - <%- usd %></div><div>eur - <%- eur %></div>"),
+
+        render: function(model) {
+            this.$el.html(this.template(model.attributes));
+            return this;
+        }
+    });
+
+    let app = new AppView();
+
+    currencies.fetch().then(() => {
+        let model = _.findWhere(currencies.models, {id: 2})
+        app.render(model);
+    })
+
+    setTimeout(() => { app.remove(); }, 3500);
+
 })
 </script>
 
