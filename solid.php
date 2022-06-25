@@ -84,7 +84,7 @@ class OutsideItem implements ICountWords {
 
 class OutsideItemIgnorer extends OutsideItem {
 
-    // LISKOV SUBSTITUTION does not change contract from OutsideItem (its method of ICountWords)
+    // LISKOV SUBSTITUTION does not change contract from OutsideItem (its method of TCountWords <--> ICountWords)
     public function countWordsByField(string $fieldName = 'text') : int {
         return 10;
     }
@@ -123,7 +123,7 @@ class FormatterEmail implements IDataFormatter {
 
             // OPEN CLOSED closed for changes (counting words is in OutsideItem, so we do not need to change this class on adding OutsideItemIgnorer logic)
             if ($item->countWordsByField() > 100) {
-                continue;
+                continue; // false SINGLE RESPONSIBILITY it is filtering and formatting
             }
 
             // SINGLE RESPONSIBILITY creates content string using standard data contract
