@@ -51,11 +51,8 @@ class Collection implements Iterator {
 
     private $items = [];
 
-    public function __construct(array $models, string $class = OutsideItem::class) {
-        foreach ($models as $model) {
-            /** @var IToOutsideItem $model */
-            $this->items[] = new $class($model);
-        }
+    public function __construct(array $models) {
+        $this->items[] = $models;
     }
 
     public function current() { return $this->items[0]; }
@@ -76,9 +73,13 @@ class OutsideItem implements ICountWords {
     public $tip;
 
     public function __construct(IToOutsideItem $model) {
-        // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
         $arr = $model->toOutsideArray();
-        $this->text = $arr['text']; // etc
+        // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
+        foreach ($this as $fieldName => $val) {
+            if (isset($arr[$fieldName])) {
+                $this->$fieldName = $arr[$fieldName];
+            }
+        }
     }
 }
 
@@ -90,7 +91,7 @@ class OutsideItemIgnorer extends OutsideItem {
     }
 }
 
-// INTERFACE SEGREGATION models do not implement this method, because JustInfo does not have text field to count words
+// INTERFACE SEGREGATION models do not implement this method, because JustInfo does not have text field to count words (but OutsideItem always has)
 trait TCountWords {
     public function countWordsByField(string $fieldName = 'text') : int {
         if (!$this->$fieldName) {
@@ -109,7 +110,7 @@ class ProviderDB implements IDataProvider {
     }
 
     public function getForChannelBeta() : Collection {
-        return new Collection([] /* DB::Table->where($query)->get(); */, OutsideItemIgnorer::class);
+        return new Collection([] /* DB::Table->where($query)->get(); */);
     }
 }
 
@@ -120,38 +121,42 @@ class FormatterEmail implements IDataFormatter {
         $result = '';
         foreach ($items as $item) {
             /** @var OutsideItem $item */
+            $text = $item->text;
 
             // OPEN CLOSED closed for changes (counting words is in OutsideItem, so we do not need to change this class on adding OutsideItemIgnorer logic)
             if ($item->countWordsByField() > 100) {
-                continue; // false SINGLE RESPONSIBILITY it is filtering and formatting
+                // continue; // not SINGLE RESPONSIBILITY it is filtering and formatting
+
+                $text = substr($text, 0, 100500); // now it is not a filter
             }
 
             // SINGLE RESPONSIBILITY creates content string using standard data contract
-            $result .= '<some_tag>' . $item->text . '</some_tag>';
+            $result .= '<some_tag>' . $text . '</some_tag>';
         }
         return $result;
     }
 }
 
-// models
 
+/** !!!! here are MODELs !!!! */
+
+/**
+ * @property integer $id
+ * @property string|null $text
+ * @property string|null $description
+ * @property string|null $creator
+ */
 class FunnyStory implements IToOutsideItem {
 
     protected $attributes = ['id', 'text', 'description', 'creator'];
 
     // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
     public function toOutsideArray() : array {
-        /**
-         * @var integer $id
-         * @var string|null $text
-         * @var string|null $description
-         * @var string|null $creator
-         */
         return [
-            'text' => $this->$text ?? '',
-            'section' => 'some_constant',
-            'author' => $this->$creator,
-            'tip' => $this->$description ?? '',
+            'text' => $this->text ?? '',
+            'section' => 'SOME_CONSTANT',
+            'author' => $this->creator,
+            'tip' => $this->description ?? '',
         ];
         // KISS yes we can create some factory to transform db-model-to-outside-model,
         //      but in these case we can easily replace-change the model...
@@ -161,47 +166,45 @@ class FunnyStory implements IToOutsideItem {
     public function toLogArray() {
         return [
             'log' => $this->toOutsideArray(), // I think its KISS example
-            'project' => 'some_constant',
+            'project' => 'SOME_CONSTANT',
         ];
     }
 }
 
-class SeriousPost implements IToOutsideItem{
+/**
+ * @property integer $id
+ * @property string $post
+ * @property string $title
+ * @property array $author
+ */
+class SeriousPost implements IToOutsideItem {
 
     protected $attributes = ['id', 'post', 'title', 'author'];
 
     // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
     public function toOutsideArray() : array {
-        /**
-         * @var integer $id
-         * @var string $post
-         * @var string $title
-         * @var array $author
-         */
         return [
-            'text' => $this->$title . $this->$post,
-            'section' => $this->$author['section'],
-            'author' => $this->$author['name'],
-            'tip' => $this->$title,
+            'text' => $this->title . $this->post,
+            'section' => $this->author['section'],
+            'author' => $this->author['name'],
+            'tip' => $this->title,
         ];
     }
 }
 
-class JustInfo implements IToOutsideItem{
+/**
+ * @property integer $id
+ * @property string $note
+ */
+class JustInfo implements IToOutsideItem {
 
     protected $attributes = ['id', 'note'];
 
     // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
     public function toOutsideArray() : array {
-        /**
-         * @var integer $id
-         * @var string $note
-         */
         return [
-            'text' => '',
-            'section' => 'some_constant',
-            'author' => null,
-            'tip' => $this->$note,
+            'section' => 'SOME_CONSTANT',
+            'tip' => $this->note,
         ];
     }
 }
