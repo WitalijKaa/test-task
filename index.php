@@ -10,13 +10,9 @@ if (!$current || !$end) {
     echo 0; exit;
 }
 
-$splitAll = array_merge(array_values(splitNumber($current)), array_values(splitNumber($end)));
-
-list ($numbers, $sums) = prepareCache((int)min($splitAll), (int)max($splitAll));
-
+list ($numbers, $sums) = prepareCache();
 
 $response = 0;
-
 while ($current <= $end) {
     $split = splitNumber($current);
 
