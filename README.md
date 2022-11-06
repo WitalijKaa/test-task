@@ -1,6 +1,11 @@
 # test-task I == ugly format
 
-##tags: VueJS frontend architecture
+- VueJS
+- TypeScript
+- Pug
+- MaterializeCss
+- frontend
+- architecture
 
 Show data.json nice, where
 

@@ -43,7 +43,7 @@ ul.collapsible
               span.card-title {{item.name}}
               p Code ## {{item.id}}
             div.card-action
-              a(href="#" @click.prevent) available {{item.amount}}
+              a(href="#" @click.prevent) available {{item.amount - storeCart.getAmountByID(item.id)}}
               a(href="#" @click.prevent :class="[storeCurrency.isUsdRised ? 'red-text' : 'green-text']") price {{item.priceRUB}} ₽
               a(href="#" @click.prevent="buyItem(item.id)") buy
 </template>

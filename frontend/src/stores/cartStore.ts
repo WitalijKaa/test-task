@@ -11,7 +11,17 @@ export const useCartStore = defineStore({
     items: {} as ItemsType,
   }),
   getters: {
-    
+      getAmountByID() {
+          return (itemID: string) : number => {
+              let amount = 0;
+              for (const itemsKey in this.items) {
+                  if (itemID == this.items[itemsKey].id) {
+                      return this.items[itemsKey].amount;
+                  }
+              }
+              return amount;
+          }
+      },
   },
   actions: {
     buyItem(id: string, amount: number = 1) {
