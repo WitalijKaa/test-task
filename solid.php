@@ -74,6 +74,7 @@ class OutsideItem implements ICountWords {
 
     public function __construct(IToOutsideItem $model) {
         $arr = $model->toOutsideArray();
+        
         // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
         foreach ($this as $fieldName => $val) {
             if (isset($arr[$fieldName])) {
