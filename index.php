@@ -35,7 +35,7 @@ function getSum(string $num) : int {
 }
 
 function prepareCache(int $min = 1, int $max = 999) : array {
-    $numbers = [];
+    $numbers = ['000' => 0];
     $sums = [];
     for ($i = $min; $i <= $max; $i++) {
         $num = str_pad($i, 3, '0', STR_PAD_LEFT);
