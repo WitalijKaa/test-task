@@ -15,9 +15,9 @@ ul.collection
   li.collection-item.avatar(v-for="item in storeCart.items")
     i.material-icons.circle.green insert_chart
     span.title {{item.name}}
-    p кол-во {{item.amount}}
+    p amount {{item.amount}}
       br
-      | общая цена {{item.amount * item.priceRUB}}
+      | full price {{item.amount * item.priceRUB}}
     a.secondary-content(href="#" @click.prevent)
       i.material-icons delete_outline
       a.secondary-content(href="#" @click.prevent)

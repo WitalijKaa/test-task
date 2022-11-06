@@ -1,51 +1,46 @@
-# vue-ts-three
+# test-task I == ugly format
 
-This template should help get you started developing with Vue 3 in Vite.
+tags: VueJS frontend architecture
 
-## Recommended IDE Setup
+Show data.json nice, where
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+"C" - price USD - transform it to rubles.
+"G" - id of group.
+"T" - id of good.
+"P" - items left.
 
-## Type Support for `.vue` Imports in TS
+Once per 15 seconds currency rates changes. Put colors if rubles-cost is higher or lower. Create shop-cart.
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## deploy
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+composer install
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+mount /public to http://tt.loc/
 
-## Customize configuration
+it will just create an api
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+http://tt.loc/api/v1/currency
+http://tt.loc/api/v1/data/1/data.json
+http://tt.loc/api/v1/data/1/names.json
 
-## Project Setup
+goto /frontend
 
-```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+## comments
 
-```sh
-npm run build
-```
+all api communication and storing data goes throw the /frontend/src/stores
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+viewing data and cart goes throw the /frontend/src/components
 
-```sh
-npm run test:unit
-```
+data items is represented in models
 
-# task I dont like
+to handle mess in api data there is a conf.ts
+
+components should be separated to small view items, but I think it's very obvious and very easy
+
+# original-task-text of the task I dont like
 
 Получить данные из файла data.json и вывести их на страницу как это показано на рис."пример.png".
 
