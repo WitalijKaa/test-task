@@ -11,7 +11,7 @@ class Controller {
         /** @var IDataFormatter $formatter */
         $formatter = /* App::service->getFormatter() or... */ new FormatterEmail();
 
-        $items = $provider->getForChannelAlpha();
+        $items = $provider->getAlpha();
         return $formatter->format($items);
 
         // SINGLE RESPONSIBILITY
@@ -26,9 +26,9 @@ class Controller {
 
 interface IDataProvider {
     /** @return Collection|OutsideItem[] */
-    public function getForChannelAlpha() : Collection;
+    public function getAlpha() : Collection;
     /** @return Collection|OutsideItem[] */
-    public function getForChannelBeta() : Collection;
+    public function getBeta() : Collection;
 }
 
 interface IDataFormatter {
@@ -105,12 +105,12 @@ trait TCountWords {
 // DEPENDENCY INVERSION realization relies on interface
 class ProviderDB implements IDataProvider {
 
-    // SINGLE RESPONSIBILITY controller for db or files or etc. any similar class will return the collection because of IDataProvider
-    public function getForChannelAlpha() : Collection {
+    // SINGLE RESPONSIBILITY repository for db or files or etc. any similar class will return the collection because of IDataProvider
+    public function getAlpha() : Collection {
         return new Collection([] /* DB::Table->where($query)->get(); */);
     }
 
-    public function getForChannelBeta() : Collection {
+    public function getBeta() : Collection {
         return new Collection([] /* DB::Table->where($query)->get(); */);
     }
 }
