@@ -3,6 +3,10 @@ require('./bootstrap');
 window.test12app = {
     lastID: null,
     nextUrls: [],
+    statuses: {
+        approve: 1,
+        decline: 2,
+    },
 };
 
 window.addEventListener("load", (event) => {
@@ -54,11 +58,19 @@ window.addEventListener("load", (event) => {
             });
     }
 
-    document.getElementById('approve').addEventListener('click', (event) => {
-        event.preventDefault();
+    ['approve', 'decline'].forEach((elemID) => {
+        document.getElementById(elemID).addEventListener('click', (event) => {
+            event.preventDefault();
 
-        let id = document.getElementById('approve').dataset.id;
-        if (!id) { return; }
+            let id = document.getElementById(elemID).dataset.id;
+            if (!id) { return; }
+
+            axios.post(
+                '/api/v1/image/' + id + '/' + window.test12app.statuses[elemID],
+                { url: document.getElementById('photo').src }
+            )
+                .finally(() => { showPhoto(); });
+        });
     });
 });
 
