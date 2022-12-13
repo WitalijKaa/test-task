@@ -1,14 +1,19 @@
-# company for game development
+# some pictures approver
 
 ## test-task
 
-### find amount of numbers where sum of first 3 digits == sum of last 3 digits
-### but sum must be 1 digit long, so for example
+### use Yii2 or Laravel, PostgreSQL, nginx and Composer
 
-- try 4+5+6 = 15
-- catch 1+5 = 6
-- finally 4+5+6 = 6
+### create web-page where you can approve pictures from https://picsum.photos/
 
-### optimize for fast-run
+- get photo using https://picsum.photos/600/500
+- just show picture and APPROVE DECLINE buttons
+- save action to DB as async query
+- save pictures with id of picsum.photos id
 
-### example of use script.php?start=325678&end=412987
+### create admin-page where you can watch processed result
+
+- access to page using GET-param ?token=xyz123
+- show table with columns: ID, process-result, cancel-process button
+
+### result task to deploy.sh for Composer work with Linux
