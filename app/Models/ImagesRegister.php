@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property int $foreign_id
  * @property int $status
+ * @property string $status_label
  * @property string|null $url
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
@@ -23,9 +24,20 @@ class ImagesRegister extends Model
 
     const STATUSES_FORBIDDEN = [self::STATUS_APPROVED, self::STATUS_DECLINED];
 
+    const STATUSES_LABELS = [
+        self::STATUS_APPROVED => 'Approved',
+        self::STATUS_DECLINED => 'Declined',
+        self::STATUS_AWAIT => 'Undefined',
+        self::STATUS_RESET => 'Undefined',
+    ];
+
     protected $casts = [
         'created_at' => 'datetime:Y-m-d H:i',
         'updated_at' => 'datetime:Y-m-d H:i',
     ];
+
+    public function getStatusLabelAttribute() {
+        return static::STATUSES_LABELS[$this->status] ?? 'Unknown';
+    }
 
 }

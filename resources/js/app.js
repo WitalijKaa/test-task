@@ -2,6 +2,8 @@ require('./bootstrap');
 
 window.test12app = {
     lastID: null,
+    lastPage: 0,
+    photoAwait: true,
     nextUrls: [],
     statuses: {
         approve: 1,
@@ -15,7 +17,7 @@ window.addEventListener("load", (event) => {
 
     function showPhoto() {
         if (!window.test12app.nextUrls.length) {
-            findNextUrls(1).then(() => { showPhoto(); });
+            findNextUrls(window.test12app.lastPage + 1).then(() => { showPhoto(); });
         } else {
             let item = window.test12app.nextUrls.shift();
             document.getElementById('photo').src = item.url;
@@ -30,7 +32,7 @@ window.addEventListener("load", (event) => {
     }
 
     async function findNextUrls(page) {
-        await axios.get('https://picsum.photos/v2/list/?page=' + page + '&limit=100').then(function (response) {
+        await axios.get('https://picsum.photos/v2/list/?page=' + page + '&limit=10').then(function (response) {
             window.test12app.nextUrls = response.data.filter((item) => {
                     if (!item.id || +item.id <= window.test12app.lastID) {
                         return false
@@ -48,7 +50,9 @@ window.addEventListener("load", (event) => {
         if (!window.test12app.nextUrls.length) {
             await findNextUrls(page + 1);
         }
-        console.log('##', window.test12app.nextUrls.length)
+        else {
+            window.test12app.lastPage = page;
+        }
     }
 
     async function findLastID() {
@@ -58,18 +62,26 @@ window.addEventListener("load", (event) => {
             });
     }
 
+    document.getElementById('photo').addEventListener('load', () => {
+        window.test12app.photoAwait = false;
+    });
+
     ['approve', 'decline'].forEach((elemID) => {
         document.getElementById(elemID).addEventListener('click', (event) => {
             event.preventDefault();
+            if (window.test12app.photoAwait) {
+                return;
+            }
+            window.test12app.photoAwait = true;
 
             let id = document.getElementById(elemID).dataset.id;
             if (!id) { return; }
 
-            axios.post(
-                '/api/v1/image/' + id + '/' + window.test12app.statuses[elemID],
-                { url: document.getElementById('photo').src }
-            )
-                .finally(() => { showPhoto(); });
+            axios.post('/api/v1/image/' + id + '/' + window.test12app.statuses[elemID],
+                { url: document.getElementById('photo').src });
+
+            window.test12app.lastID = id;
+            showPhoto();
         });
     });
 });

@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+
+/** @var $items \Illuminate\Database\Eloquent\Collection|\App\Models\ImagesRegister[] */
+
+?><!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -28,11 +32,13 @@
                     </thead>
 
                     <tbody>
+                    @foreach($items as $item)
                     <tr>
-                        <td>ID</td>
-                        <td>Status</td>
-                        <td>Action</td>
+                        <td>{{$item->foreign_id}}</td>
+                        <td data-status-id="{{$item->id}}">{{$item->status_label}}</td>
+                        <td><a data-reset-btn-id="{{$item->id}}" class="waves-effect waves-light btn-small">Reset</a></td>
                     </tr>
+                    @endforeach
                     </tbody>
                 </table>
 

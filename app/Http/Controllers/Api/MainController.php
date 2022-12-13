@@ -28,7 +28,13 @@ class MainController extends Controller
         return ['item' => $model];
     }
 
-    public function actionLala(string $item) {
-        return ['item' => $item];
+    public function actionImageUpdate(int $id) {
+
+        /** @var ImagesRegister $model */
+        $model = ImagesRegister::findOrFail($id);
+        $model->status = ImagesRegister::STATUS_RESET;
+        $model->save();
+
+        return ['item' => $model];
     }
 }
