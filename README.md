@@ -6,7 +6,7 @@
 
 ### create web-page where you can approve pictures from https://picsum.photos/
 
-- get photo using https://picsum.photos/600/500
+- get photo using https://picsum.photos/v2/list/?
 - just show picture and APPROVE DECLINE buttons
 - save action to DB as async query
 - save pictures with id of picsum.photos id

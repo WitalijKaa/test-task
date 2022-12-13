@@ -7,8 +7,8 @@ use App\Models\ImagesRegister;
 
 class MainController extends Controller
 {
-    public function actionNextPicture() {
-        return ['item' => ImagesRegister::findOrFail(1)];
+    public function actionLastId() {
+        return ['item' => ImagesRegister::max('foreign_id') ?? 0];
     }
 
     public function actionLala(string $item) {

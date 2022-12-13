@@ -15,7 +15,9 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Witalij Kaa'),
+
+    'superSecretToken' => env('SUPER_SECRET_TOKEN'),
 
     /*
     |--------------------------------------------------------------------------
