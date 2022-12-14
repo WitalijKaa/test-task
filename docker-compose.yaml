@@ -1,0 +1,41 @@
+# docker-compose.yaml
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: app
+    tty: true
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/test_12
+      APP_ENV: local
+      APP_KEY: base64:TSMjUVevC9gL+SYgkuOPIRWBUpRdUtSBjUjnPVHPdDM=
+      APP_DEBUG: 1
+      APP_URL: http://localhost
+      SUPER_SECRET_TOKEN: xyz123
+    ports:
+      - "3001:80"
+    networks:
+      - app-network
+
+  db:
+    image: postgres:11
+    container_name: db
+    restart: always
+    tty: true
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: test_12
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
