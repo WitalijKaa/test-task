@@ -16,4 +16,6 @@
 - access to page using GET-param ?token=xyz123
 - show table with columns: ID, process-result, cancel-process button
 
-### result task to deploy.sh for Composer work with Linux
+# result
+
+# docker-compose up
