@@ -2,7 +2,7 @@
 
 ## test-task
 
-### use Yii2 or Laravel, PostgreSQL, nginx and Composer
+### use Yii2 or Laravel, PostgreSQL, nginx and Docker
 
 ### create web-page where you can approve pictures from https://picsum.photos/
 
@@ -19,3 +19,7 @@
 # result
 
 # docker-compose up
+
+## http://localhost:3001/
+
+## http://localhost:3001/adm?token=xyz123
