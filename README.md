@@ -1,4 +1,4 @@
-# some pictures approver
+# some pictures approver https://test12.magic-stone-circuit.app/
 
 ## test-task
 
@@ -29,3 +29,5 @@ Fresh tests...
 I have got this working only after second launch of "docker-compose up" in Linux. Looks like first time postgres wasnt runned on the moment when migrations starts. Weird.
 
 I used nginx.debian11.conf to make my Debian11 dev server worked as a proxy. 
+
+The demo here https://test12.magic-stone-circuit.app/
