@@ -27,12 +27,10 @@ sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/
 
 curl -fsSL https://download.docker.com/linux/debian/gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/docker.gpg] https://download.docker.com/linux/debian $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url  | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | head -n 1 | tee /home/hihi/sh/docker_c > /dev/null
+curl -s https://api.github.com/repos/docker/compose/releases/latest | grep browser_download_url | grep docker-compose-linux-x86_64 | cut -d '"' -f 4 | head -n 1 | wget -O /home/hihi/sh/docker_c -qi -
 chmod 744 /home/hihi/sh/docker_c
 mv /home/hihi/sh/docker_c /usr/local/bin/docker-compose
-
 curl -s https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose | tee /etc/bash_completion.d/docker-compose > /dev/null
-
 
 apt update
 apt upgrade -y
@@ -100,7 +98,7 @@ dpkg -i /home/hihi/sh/mysql-apt-config_0.8.24-1_all.deb
 rm /home/hihi/sh/mysql-apt-config_0.8.24-1_all.deb
 apt install mysql-server -y
 
-systemctl enable --now docker
+# systemctl enable --now docker
 
 ufw enable
 ufw status numbered
@@ -108,3 +106,6 @@ ufw status numbered
 reboot
 
 # end
+
+
+

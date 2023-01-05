@@ -24,6 +24,14 @@ server {
     }
 }
 
+#server {
+#    listen proxy-docker.magic-stone-circuit.app:80;
+#
+#    location / {
+#        proxy_pass http://localhost:3001/;
+#    }
+#}
+
 server {
     keepalive_timeout 80;
     charset utf-8;
@@ -71,4 +79,5 @@ server {
     }
 
 }
+
 
