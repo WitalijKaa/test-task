@@ -11,6 +11,7 @@ services:
     depends_on:
       - db
     environment:
+      DB_CONNECTION: pgsql
       DATABASE_URL: postgresql://postgres:postgres@db:5432/test_12
       APP_ENV: local
       APP_KEY: base64:TSMjUVevC9gL+SYgkuOPIRWBUpRdUtSBjUjnPVHPdDM=
