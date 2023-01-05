@@ -23,3 +23,9 @@
 ## http://localhost:3001/
 
 ## http://localhost:3001/adm?token=xyz123
+
+Fresh tests...
+
+I have got this working only after second launch of "docker-compose up" in Linux. Looks like first time postgres wasnt runned on the moment when migrations starts. Weird.
+
+I used nginx.debian11.conf to make my Debian11 dev server worked as a proxy. 
