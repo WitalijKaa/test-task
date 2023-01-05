@@ -56,7 +56,7 @@ apt install php7.3-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl
 apt install php7.2-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
 apt install php7.1-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
 apt install php7.0-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php5.6-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
+apt install php5.6-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
 apt install postgresql-13 postgresql-contrib -y
 apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
@@ -97,6 +97,8 @@ chown -R hihi:www-data /var/www
 dpkg -i /home/hihi/sh/mysql-apt-config_0.8.24-1_all.deb
 rm /home/hihi/sh/mysql-apt-config_0.8.24-1_all.deb
 apt install mysql-server -y
+
+sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
 
 # systemctl enable --now docker
 

@@ -1,10 +1,16 @@
 # login as hihi
 # /home/hihi/sh/init_20.sh
 
+# sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+
+# sudo -u postgres psql -c "CREATE DATABASE test_12;"
+# /home/hihi/sh/git-clone.sh -r test-task -b task_12 -f test_folder_12 -s test12 -d pgm -n test_12
+
 ln -s /var/www /home/hihi/www
 
 rm -rf /home/hihi/sh/dotssh
 
+mkdir /var/www/git
 mkdir /var/www/magic-stone-circuit.app
 mkdir /var/www/sertificates
 mkdir /var/www/magic-stone-circuit.app/main

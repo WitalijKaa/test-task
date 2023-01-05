@@ -4,8 +4,8 @@ alias hhg='history | grep git'
 alias hhp='history | grep php'
 alias hha='history | grep artisan'
 alias hhd='history | grep docker'
-alias hhc='history | grep docker'
-alias hhcurl='history | grep docker'
+alias hhc='history | grep curl'
+alias hhcurl='history | grep curl'
 alias wwx='exit'
 
 #if [ -f ~/.bash_aliases ]; then
