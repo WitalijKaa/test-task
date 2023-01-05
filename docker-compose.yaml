@@ -11,7 +11,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:54328/test_12
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/test_12
       APP_ENV: local
       APP_KEY: base64:TSMjUVevC9gL+SYgkuOPIRWBUpRdUtSBjUjnPVHPdDM=
       APP_DEBUG: 1
@@ -32,7 +32,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: test_12
     ports:
-      - "54328:54328"
+      - "5432:5432"
     networks:
       - app-network
 

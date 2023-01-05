@@ -64,7 +64,6 @@ RUN touch /var/log/php/errors.log && chmod 777 /var/log/php/errors.log
 # Deployment steps
 RUN composer install --ignore-platform-reqs
 RUN chmod +x /var/www/docker/run.sh
-# RUN chmod -R a+x /var/www/node_modules
 
 RUN npm install
 RUN npm run prod
