@@ -26,34 +26,30 @@ class Controller {
 
 interface IDataProvider {
     /** @return Collection|OutsideItem[] */
-    public function getAlpha() : Collection;
+    public function getAlpha(): Collection;
     /** @return Collection|OutsideItem[] */
-    public function getBeta() : Collection;
+    public function getBeta(): Collection;
 }
 
 interface IDataFormatter {
     /** @param Collection|OutsideItem[] $items
      * @return string
      */
-    public function format(Collection $items) : string;
+    public function format(Collection $items): string;
 }
 
 interface IToOutsideItem {
-    public function toOutsideArray() : array;
+    public function toOutsideArray(): array;
 }
 
 interface ICountWords {
-    public function countWordsByField(string $fieldName = 'text') : int;
+    public function countWordsByField(string $fieldName = 'text'): int;
 }
 
 // SINGLE RESPONSIBILITY simple collection
-class Collection implements Iterator {
+class /* readonly 8.2 */ Collection implements Iterator {
 
-    private $items = [];
-
-    public function __construct(array $models) {
-        $this->items[] = $models;
-    }
+    public function __construct(private readonly array $items) { }
 
     public function current() { return $this->items[0]; }
     public function next() { return $this->items[0]; }
@@ -82,23 +78,34 @@ class OutsideItem implements ICountWords {
             }
         }
     }
+
+    private function getDefaultFieldNameForText(): string {
+        return 'text';
+    }
 }
 
 class OutsideItemIgnorer extends OutsideItem {
 
     // LISKOV SUBSTITUTION does not change contract from OutsideItem (its method of TCountWords <--> ICountWords)
-    public function countWordsByField(string $fieldName = 'text') : int {
+    public function countWordsByField(string $fieldName = 'text'): int {
         return 10;
     }
 }
 
 // INTERFACE SEGREGATION models do not implement this method, because JustInfo does not have text field to count words (but OutsideItem always has)
 trait TCountWords {
-    public function countWordsByField(string $fieldName = 'text') : int {
+    /* public const VERY_DEFAULT = 'words'; 8.2 */
+
+    abstract private function getDefaultFieldNameForText(): string;
+
+    public function countWordsByField(?string $fieldName = null): int {
+        if (!$fieldName) {
+            $fieldName = $this->getDefaultFieldNameForText();
+        }
         if (!$this->$fieldName) {
             return 0;
         }
-        return count(explode(' ', $this->$fieldName));
+        return count(explode(string: $this->$fieldName, separator: ' '));
     }
 }
 
@@ -106,11 +113,11 @@ trait TCountWords {
 class ProviderDB implements IDataProvider {
 
     // SINGLE RESPONSIBILITY repository for db or files or etc. any similar class will return the collection because of IDataProvider
-    public function getAlpha() : Collection {
+    public function getAlpha(): Collection {
         return new Collection([] /* DB::Table->where($query)->get(); */);
     }
 
-    public function getBeta() : Collection {
+    public function getBeta(): Collection {
         return new Collection([] /* DB::Table->where($query)->get(); */);
     }
 }
@@ -118,7 +125,7 @@ class ProviderDB implements IDataProvider {
 // DEPENDENCY INVERSION realization relies on interface
 class FormatterEmail implements IDataFormatter {
     
-    public function format(Collection $items) : string {
+    public function format(Collection $items): string {
         $result = '';
         foreach ($items as $item) {
             /** @var OutsideItem $item */
@@ -152,16 +159,21 @@ class FunnyStory implements IToOutsideItem {
     protected $attributes = ['id', 'text', 'description', 'creator'];
 
     // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
-    public function toOutsideArray() : array {
+    public function toOutsideArray(): array {
         return [
-            'text' => $this->text ?? '',
+            'text' => $this->guarded()?->text ?? '',
             'section' => 'SOME_CONSTANT',
             'author' => $this->creator,
-            'tip' => $this->description ?? '',
+            'tip' => $this->guarded()?->description ?? '',
         ];
-        // KISS yes we can create some factory to transform db-model-to-outside-model,
-        //      but in these case we can easily replace-change the model...
-        //      I mean changes in FunnyStory will not affect SeriousPost JustInfo
+        // KISS we can create some factory to transform db-model-to-outside-model (for more strict way, using DTO),
+        //      but in this example we are keeping immutable code more closely to reason of change and reason of its appearance...
+        //      I mean for some small things this is how I understand KISS (look 5 lines below)
+    }
+
+    private function guarded(): null|FunnyStory {
+        if (str_contains($this->description, 'secret')) { return null; }
+        return $this;
     }
 
     public function toLogArray() {
@@ -183,7 +195,7 @@ class SeriousPost implements IToOutsideItem {
     protected $attributes = ['id', 'post', 'title', 'author'];
 
     // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
-    public function toOutsideArray() : array {
+    public function toOutsideArray(): array {
         return [
             'text' => $this->title . $this->post,
             'section' => $this->author['section'],
@@ -194,7 +206,7 @@ class SeriousPost implements IToOutsideItem {
 }
 
 /**
- * @property integer $id
+ * @property integer|JustEnum $id
  * @property string $note
  */
 class JustInfo implements IToOutsideItem {
@@ -202,10 +214,33 @@ class JustInfo implements IToOutsideItem {
     protected $attributes = ['id', 'note'];
 
     // SINGLE RESPONSIBILITY models knows their fields, OutsideItem knows outside-content fields
-    public function toOutsideArray() : array {
+    public function toOutsideArray(): array {
         return [
             'section' => 'SOME_CONSTANT',
             'tip' => $this->note,
         ];
     }
+
+    public function someVeryPhpFunction(/* (SeriousPost&IToOutsideItem)|null $param 8.2 */): ?IToOutsideItem {
+        try {
+            return match ($this->id) {
+                JustEnum::Red => new SeriousPost(),
+                JustEnum::Black => new FunnyStory(),
+            };
+        }
+        catch (Throwable) {
+            return doIt(...['say' => 'mama', 'code' => 123]);
+        }
+    }
+
+    /* public function someVeryPhpFunction(): false {} 8.2 */
+}
+
+enum JustEnum : int {
+    case Red = 1;
+    case Black = 2;
+}
+
+function doIt(string $say, int $code) {
+    return null;
 }
