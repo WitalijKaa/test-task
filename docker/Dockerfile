@@ -1,7 +1,5 @@
 FROM php:8.1-fpm
 
-COPY composer.lock composer.json /var/www/app/
-
 WORKDIR /var/www/app
 
 RUN apt-get update && apt-get install -y \
@@ -24,14 +22,18 @@ RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
 RUN docker-php-ext-configure gd --prefix=/usr --with-jpeg --with-webp --with-freetype
 RUN docker-php-ext-install gd
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+COPY . /var/www/app
+RUN cp ./.env.example ./.env
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/var/www/app
+RUN php composer.phar install
+
+RUN php artisan key:generate
+RUN php artisan config:cache
 
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
-
-COPY . /var/www/app
-
-RUN chmod 774 $(find /var/www/app/ -type d)
+RUN chmod 775 $(find /var/www/app/ -type d)
 RUN chmod 664 $(find /var/www/app/ -type f)
 RUN chown www:www -R /var/www/app/
 
