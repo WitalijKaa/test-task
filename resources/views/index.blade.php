@@ -18,7 +18,9 @@
         <div class="row">
             <div class="col s12 m6 offset-m3">
 
-                <h1>Witalij Kaa - Laravel 9</h1>
+                <h1>{{ $project }}</h1>
+                <h2>{{ $qwer }}</h2>
+                <h2>{{ $qwerComposer }}</h2>
 
             </div>
         </div>

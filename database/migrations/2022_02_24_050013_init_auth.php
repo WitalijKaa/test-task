@@ -24,6 +24,16 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
         });
 
+        Schema::create('jobs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('queue')->index();
+            $table->longText('payload');
+            $table->unsignedTinyInteger('attempts');
+            $table->unsignedInteger('reserved_at')->nullable();
+            $table->unsignedInteger('available_at');
+            $table->unsignedInteger('created_at');
+        });
+
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
@@ -34,22 +44,23 @@ return new class extends Migration
             $table->timestamp('failed_at')->useCurrent();
         });
 
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
-            $table->id();
-            $table->morphs('tokenable');
-            $table->string('name');
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
-            $table->timestamps();
-        });
+//        Schema::create('personal_access_tokens', function (Blueprint $table) {
+//            $table->id();
+//            $table->morphs('tokenable');
+//            $table->string('name');
+//            $table->string('token', 64)->unique();
+//            $table->text('abilities')->nullable();
+//            $table->timestamp('last_used_at')->nullable();
+//            $table->timestamp('expires_at')->nullable();
+//            $table->timestamps();
+//        });
     }
 
     public function down()
     {
         Schema::dropIfExists('personal_access_tokens');
         Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('jobs');
         Schema::dropIfExists('password_resets');
         Schema::dropIfExists('users');
     }
