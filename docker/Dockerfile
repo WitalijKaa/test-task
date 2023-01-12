@@ -24,6 +24,8 @@ RUN docker-php-ext-install gd
 
 COPY . /var/www/app
 RUN cp ./.env.example ./.env
+RUN rm -rf ./.git
+RUN rm -rf ./.idea
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/var/www/app
 RUN php composer.phar install

@@ -1,15 +1,4 @@
-authorized_keys
-
-ca_bundle.crt
-certificate.crt
-
-private.key
-servak
-servak.pub
-servak.putty.ppk
-servak.putty.pub
-
-
+public/.htaccess
 
 
 

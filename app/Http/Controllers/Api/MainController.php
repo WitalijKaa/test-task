@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Contracts\ActionContract;
 use App\Http\Controllers\Controller;
-use App\Models\ImagesRegister;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class MainController extends Controller
 {
-    public function actionApi() {
+    public function actionApi(ActionContract $action) {
+        $action(123);
         return ['item' => 1];
     }
 }
