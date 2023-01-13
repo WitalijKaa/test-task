@@ -4,6 +4,11 @@
 
 ## test-task 12
 
+- architecture
+- Laravel
+- Docker
+- frontend
+
 ### use Laravel, MySQL, Nginx, Docker
 
 ### create web-page where you can approve pictures from https://picsum.photos/
