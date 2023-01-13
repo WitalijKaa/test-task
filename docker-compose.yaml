@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    image: witalijkaa/laravel-mysql-php-81
+    image: witalijkaa/test_12
     container_name: app
     depends_on:
       - db

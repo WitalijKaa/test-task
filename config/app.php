@@ -17,6 +17,8 @@ return [
 
     'name' => env('APP_NAME', 'WitalijKaa_Laravel_9'),
 
+    'superSecretToken' => env('SUPER_SECRET_TOKEN'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
