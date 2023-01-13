@@ -1,21 +1,18 @@
-# test-task II == low level js
+# low level js exercises
 
-- architecture
-- JavaScript
-- BEM Html Css
-- frontend
-- OOP
+## test-task 2
 
-Create SPA to edit users:
+### use JavaScript, CSS, HTML
+
+### Create SPA to edit users
 
 - table with users data, edit and remove buttons
 - new user inputs, validation
 - do not use any libraries or frameworks
 
-Plus mini task: canvas with stars that can detect star color by click.
+### Plus mini task: canvas with stars that can detect star color by click
 
-## comments
+---
+## to make it work:
 
-I had implemented some base architecture that looks like BackboneJS and VueJS.
-
-I like that validator is very separate and Human-model is thin.
+# index.html in public dir
