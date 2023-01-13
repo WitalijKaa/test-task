@@ -29,9 +29,9 @@ https://github.com/WitalijKaa/test-task/blob/task_1_2/resources/data/1/data.json
 
 ## http://localhost/
 
-#### http://localhost/api/v1/data/1/data.json
+#### http://localhost:3000/api/v1/data/1/data.json
 
-#### http://localhost/api/v1/data/1/names.json
+#### http://localhost:3000/api/v1/data/1/names.json
 
 ---
 The demo here https://test1.magic-stone-circuit.app/
