@@ -1,4 +1,6 @@
-# some pictures approver https://test12.magic-stone-circuit.app/
+# some pictures approver
+
+#### https://test12.magic-stone-circuit.app/
 
 ## test-task
 
@@ -16,7 +18,7 @@
 - access to page using GET-param ?token=xyz123
 - show table with columns: ID, process-result, cancel-process button
 
-# result
+## to make it work:
 
 # docker-compose up
 
@@ -31,3 +33,7 @@ I have got this working only after second launch of "docker-compose up" in Linux
 I used nginx.debian11.conf to make my Debian11 dev server worked as a proxy. 
 
 The demo here https://test12.magic-stone-circuit.app/
+
+## upd: nicer docker
+
+https://github.com/WitalijKaa/test-task/tree/task_12_3
