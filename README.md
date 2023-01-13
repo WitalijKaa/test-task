@@ -2,6 +2,12 @@
 
 ## test-task 2
 
+- architecture
+- JavaScript
+- BEM Html Css
+- frontend
+- OOP
+
 ### use JavaScript, CSS, HTML
 
 ### Create SPA to edit users
