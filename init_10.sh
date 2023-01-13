@@ -17,6 +17,8 @@
 # login as hihi
 # sudo su
 
+# timedatectl set-timezone Europe/Belgrade
+
 # nano /etc/ssh/sshd_config
 # PermitRootLogin no
 
@@ -48,15 +50,15 @@ apt install composer -y
 apt install nodejs -y
 apt install npm -y
 apt install imagemagick -y
-apt install php8.2-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php8.1-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php8.0-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php7.4-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php7.3-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php7.2-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php7.1-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php7.0-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
-apt install php5.6-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,zip,zip-dbgsym} -y
+apt install php8.2-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php8.1-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php8.0-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php7.4-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php7.3-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php7.2-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php7.1-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php7.0-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,ds,ds-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
+apt install php5.6-{bz2,bz2-dbgsym,cli,cli-dbgsym,common,common-dbgsym,curl,curl-dbgsym,fpm,fpm-dbgsym,gd,gd-dbgsym,imagick,imagick-dbgsym,imap,imap-dbgsym,mbstring,mbstring-dbgsym,mysql,mysql-dbgsym,opcache,opcache-dbgsym,pgsql,pgsql-dbgsym,xml,xml-dbgsym,zip,zip-dbgsym} -y
 apt install postgresql-13 postgresql-contrib -y
 apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 

@@ -41,7 +41,7 @@ if [ "m" = "$database" ] || [ "pgm" = "$database" ] || [ "mym" = "$database" ]; 
     php /var/www/git/$folder/artisan migrate
 fi
 
-chmod 774 $(find /var/www/git/$folder/ -type d)
+chmod 775 $(find /var/www/git/$folder/ -type d)
 chmod 664 $(find /var/www/git/$folder/ -type f)
 
 # end

@@ -50,6 +50,7 @@ server {
     set $dir "magic-stone-circuit.app/main";
     if ($subDom) { set $dir $subDom; }
     if (-d "/var/www/$subDom/public") { set $dir "$subDom/public"; }
+#    if (-d "/var/www/$subDom/frontend/dist") { set $dir "$subDom/frontend/dist"; }
 
     root /var/www/$dir;
     index index.html index.php;

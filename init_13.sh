@@ -18,6 +18,7 @@ chmod 600 /home/hihi/.ssh/servak.putty.pub
 chmod 744 /home/hihi/sh/init_10.sh
 chmod 744 /home/hihi/sh/init_20.sh
 chmod 744 /home/hihi/sh/git-clone.sh
+chmod 744 /home/hihi/sh/nginx-sert.sh
 
 cp /home/hihi/sh/.bash_aliases /home/hihi/.bash_aliases
 
