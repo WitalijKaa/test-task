@@ -1,6 +1,6 @@
 <?php
 
-$config = 'alpha'; // or 'beta'
+$config = 'alpha';
 
 switch ($config) {
     case 'alpha':
@@ -10,40 +10,16 @@ switch ($config) {
 }
 
 /** @var $model Human */
-$model->tellMeStory();
+$model->tellMeStory(); // client code based on factory method
 
 
 
 
 /** code... */
 
-
-
-
-interface Story {
-    public function getContent();
-}
-
-class FunnyStory implements Story {
-
-    public function getContent() {
-        return ';)';
-    }
-}
-
-class SeriousStory implements Story {
-
-    public function getContent() {
-        return ':-]';
-    }
-}
-
-
-
-
 abstract class Human {
 
-    abstract public function getStory() : Story;
+    abstract public function getStory(): Story;
 
     public function tellMeStory() {
         $this->getStory()->getContent();
@@ -52,7 +28,7 @@ abstract class Human {
 
 class FunnyHuman extends Human {
 
-    // FACTORY METHOD is addition to other class functions
+    // FACTORY METHOD is addition to some class methods
     public function getStory() : Story {
         return new FunnyStory();
 
@@ -63,7 +39,29 @@ class FunnyHuman extends Human {
 
 class SeriousHuman extends Human {
 
-    public function getStory() : Story {
+    // FACTORY METHOD
+    public function getStory(): Story {
         return new SeriousStory();
+    }
+}
+
+
+
+
+interface Story {
+    public function getContent();
+}
+
+class FunnyStory implements Story {
+
+    public function getContent(): string {
+        return ';)';
+    }
+}
+
+class SeriousStory implements Story {
+
+    public function getContent(): string {
+        return ':-]';
     }
 }
