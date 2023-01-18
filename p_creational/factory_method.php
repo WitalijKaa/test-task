@@ -5,8 +5,10 @@ $config = 'alpha';
 switch ($config) {
     case 'alpha':
         $model = new SeriousHuman();
+        break;
     case 'beta':
         $model = new FunnyHuman();
+        break;
 }
 
 /** @var $model Human */
@@ -29,7 +31,7 @@ abstract class Human {
 class FunnyHuman extends Human {
 
     // FACTORY METHOD is addition to some class methods
-    public function getStory() : Story {
+    public function getStory(): Story {
         return new FunnyStory();
 
         // or

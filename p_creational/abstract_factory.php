@@ -7,8 +7,10 @@ $config = 'alpha';
 switch ($config) {
     case 'alpha':
         $model = new Gamefield(new ProtosArmyFactory());
+        break;
     case 'beta':
         $model = new Gamefield(new TerranArmyFactory());
+        break;
 }
 
 /** @var $model Gamefield */
@@ -25,7 +27,7 @@ class Gamefield {
     }
 
     // ABSTRACT FACTORY usage
-    public function getArmy() : array {
+    public function getArmy(): array {
         return [
             $this->factory->createTrooper(),
             $this->factory->createTrooper(),
@@ -108,7 +110,7 @@ class TerranTrooper implements Trooper {
             return $this->firePower;
         }
         else if ($enemyRange <= $this->range) {
-            return $this->firePower / 2;
+            return (int)($this->firePower / 2);
         }
         return 0;
     }
