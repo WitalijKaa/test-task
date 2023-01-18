@@ -167,13 +167,8 @@ class FunnyStory implements IToOutsideItem {
             'tip' => $this->guarded()?->description ?? '',
         ];
         // KISS we can create some factory to transform db-model-to-outside-model (for more strict way, using DTO),
-        //      but in this example we are keeping immutable code more closely to reason of change and reason of its appearance...
+        //      but in this example we are keeping "immutable" code more closely to reason of change and reason of its appearance...
         //      I mean for some small things this is how I understand KISS (look 5 lines below)
-    }
-
-    private function guarded(): null|FunnyStory {
-        if (str_contains($this->description, 'secret')) { return null; }
-        return $this;
     }
 
     public function toLogArray() {
@@ -181,6 +176,11 @@ class FunnyStory implements IToOutsideItem {
             'log' => $this->toOutsideArray(), // I think its KISS example
             'project' => 'SOME_CONSTANT',
         ];
+    }
+
+    private function guarded(): null|FunnyStory {
+        if (str_contains($this->description, 'secret')) { return null; }
+        return $this;
     }
 }
 
