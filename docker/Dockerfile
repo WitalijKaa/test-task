@@ -49,6 +49,7 @@ RUN php composer.phar install
 
 RUN php artisan key:generate
 RUN php artisan config:cache
+RUN php artisan route:cache
 
 EXPOSE 9000
 CMD ["/var/www/app/docker/cmd.sh"]
