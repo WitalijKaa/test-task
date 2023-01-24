@@ -11,4 +11,6 @@ Route::group(['prefix' => 'v1', 'namespace' => 'Api'], function () {
 
     Route::get('/api', 'MainController@actionApi');
 
+    Route::get('/qwer', 'MainController@actionQwer');
+
 });

@@ -15,7 +15,7 @@ class FormForForm extends FormRequest
     public function rules()
     {
         return [
-            new AllowedAttributes(['qwer'])
+            '*' => [new AllowedAttributes(['qwer'])],
         ];
     }
 }

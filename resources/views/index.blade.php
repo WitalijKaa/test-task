@@ -8,11 +8,8 @@
 
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-        <link type="text/css" href="/css/materialize.css" rel="stylesheet" media="screen,projection">
-        <link href="/css/app.css" rel="stylesheet">
-
-        <script src="/js/app.js"></script>
-        <script src="/js/materialize.js"></script>
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/materialize.css', 'resources/js/materialize.js'])
+        @livewireStyles
     </head>
     <body>
         <div class="row">
@@ -22,7 +19,11 @@
                 <h2>{{ $qwer }}</h2>
                 <h2>{{ $qwerComposer }}</h2>
 
+                <livewire:not-vue />
+
             </div>
         </div>
+
+        @livewireScripts
     </body>
 </html>

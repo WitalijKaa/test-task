@@ -18,5 +18,6 @@ class MainController extends Controller
     }
 
     public function actionQwer(FormForForm $request) {
+        dd($request);
     }
 }
