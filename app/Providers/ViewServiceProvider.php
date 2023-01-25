@@ -14,10 +14,10 @@ class ViewServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        View::composer(['index'], function ($view) {
-            $view->with('qwer', 'hello!');
-        });
+//        View::composer(['index'], function ($view) {
+//            $view->with('qwer', 'hello!');
+//        });
 
-        View::composer(['index'], QwerComposer::class);
+//        View::composer(['index'], QwerComposer::class);
     }
 }
